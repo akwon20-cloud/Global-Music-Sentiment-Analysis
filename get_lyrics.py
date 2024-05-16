@@ -26,7 +26,12 @@ url = "https://api.genius.com/search"
 headers = {"Authorization": f"Bearer {genius_token}"}
 genius = lyricsgenius.Genius(genius_token)
 
-cache = {} # check if cache.json exists, if not set cache = {}
+# create a cache to save work
+if os.path.exists("data/lyrics/cache.json"):
+    with open("data/lyrics/cache.json", "r") as f:
+        cache = json.load(f)
+else:
+    cache = {}
 
 for country in all_countries:
     print(f"on country: {country}")
